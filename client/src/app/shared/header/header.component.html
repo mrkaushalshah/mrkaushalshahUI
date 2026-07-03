@@ -1,47 +1,45 @@
-<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300 backdrop-blur-md bg-surface-950/80 border-b border-white/5">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+<nav class="floating-nav-dock" [class.scrolled]="isScrolled">
+  <div class="nav-container">
     
-    <div class="cursor-pointer z-50 flex items-center gap-3" (click)="scrollToSection('hero')">
-      <div class="w-8 h-8 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary font-black border border-brand-primary/20">K</div>
-      <h4 class="text-xl font-bold tracking-tighter text-white">
-        Kaushal<span class="text-brand-primary"> Shah</span>
-      </h4>
+    <!-- Logo / Brand -->
+    <div class="nav-logo" (click)="scrollToSection('hero')">
+      <div class="logo-badge">K</div>
+      <span class="logo-text">Kaushal<span class="logo-accent">.</span></span>
     </div>
 
-    <div class="hidden md:flex items-center gap-10">
-      <button (click)="scrollToSection('experience')" class="text-xs font-mono uppercase tracking-widest text-gray-400 hover:text-brand-primary transition-colors">
-        Experience
+    <!-- Nav Items (Desktop) -->
+    <div class="nav-links">
+      <button (click)="scrollToSection('experience')" class="nav-btn">
+        <span class="btn-dot"></span> Experience
       </button>
-      <button (click)="scrollToSection('projects')" class="text-xs font-mono uppercase tracking-widest text-gray-400 hover:text-brand-primary transition-colors">
-        Projects
+      <button (click)="scrollToSection('projects')" class="nav-btn">
+        <span class="btn-dot"></span> Projects
       </button>
-      <div class="w-px h-4 bg-white/10 mx-2"></div>
-      <button (click)="openLinkedIn()" class="text-xs font-mono uppercase tracking-widest text-gray-400 hover:text-brand-primary transition-colors">
+      <div class="nav-separator"></div>
+      <button (click)="openLinkedIn()" class="nav-btn">
         LinkedIn
       </button>
-      <button (click)="downloadResume()" class="bg-brand-primary hover:scale-105 active:scale-95 text-black px-6 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all">
+      <button (click)="downloadResume()" class="nav-cta">
         Resume
       </button>
     </div>
 
-    <button class="md:hidden text-white focus:outline-none p-2" (click)="isMenuOpen = !isMenuOpen">
-      <svg *ngIf="!isMenuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <!-- Mobile toggle button -->
+    <button class="mobile-toggle" (click)="isMenuOpen = !isMenuOpen" aria-label="Toggle Navigation">
+      <svg *ngIf="!isMenuOpen" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
-      <svg *ngIf="isMenuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg *ngIf="isMenuOpen" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </div>
 
-  <!-- Mobile Menu -->
-  <div class="md:hidden bg-surface-900 border-b border-white/10 absolute w-full transition-all duration-300 ease-in-out overflow-hidden"
-       [ngClass]="{'max-h-80 opacity-100': isMenuOpen, 'max-h-0 opacity-0': !isMenuOpen}">
-    <div class="flex flex-col px-6 pb-8 space-y-6 pt-6">
-      <button (click)="scrollToSection('experience')" class="text-left text-gray-300 hover:text-brand-primary text-sm font-mono uppercase tracking-widest">Experience</button>
-      <button (click)="scrollToSection('projects')" class="text-left text-gray-300 hover:text-brand-primary text-sm font-mono uppercase tracking-widest">Projects</button>
-      <button (click)="openLinkedIn()" class="text-left text-gray-300 hover:text-brand-primary text-sm font-mono uppercase tracking-widest">LinkedIn</button>
-      <button (click)="downloadResume()" class="w-full bg-brand-primary text-black font-black py-4 rounded-xl text-xs uppercase tracking-widest">Download Resume</button>
-    </div>
+  <!-- Mobile Dropdown Menu -->
+  <div class="mobile-menu" [class.menu-open]="isMenuOpen">
+    <button (click)="scrollToSection('experience')" class="mobile-nav-btn">Experience</button>
+    <button (click)="scrollToSection('projects')" class="mobile-nav-btn">Projects</button>
+    <button (click)="openLinkedIn()" class="mobile-nav-btn">LinkedIn</button>
+    <button (click)="downloadResume()" class="mobile-cta-btn">Download Resume</button>
   </div>
 </nav>

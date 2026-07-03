@@ -1,5 +1,5 @@
 <!-- ═══════════════════════════════════════════════════════════════════ -->
-<!-- HERO SECTION — Immersive Particle Universe + Magnetic Cursor      -->
+<!-- HERO SECTION — Cyber HUD Terminal + Neural Constellation Canvas    -->
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 <section id="hero" class="hero-universe" (mousemove)="onMouseMove($event)" (mouseleave)="onMouseLeave()">
     <!-- Canvas for particle system -->
@@ -8,8 +8,14 @@
     <!-- Radial gradient that follows cursor -->
     <div class="cursor-glow" [style.left.px]="mouseX" [style.top.px]="mouseY"></div>
 
-    <!-- Floating grid lines -->
-    <div class="grid-overlay"></div>
+    <!-- HUD crosshairs and coordinates -->
+    <div class="hud-overlay">
+        <div class="hud-corner hud-tl">[ SYS_STATUS: ACTIVE ]</div>
+        <div class="hud-corner hud-tr">LOC // PUNE_IND</div>
+        <div class="hud-corner hud-bl">SEC_CONN // TLS_1.3</div>
+        <div class="hud-corner hud-br">COORD // {{ mouseX | number:'1.0-0' }}, {{ mouseY | number:'1.0-0' }}</div>
+        <div class="grid-overlay"></div>
+    </div>
 
     <!-- Orbiting rings -->
     <div class="orbit-ring orbit-ring-1"></div>
@@ -18,10 +24,10 @@
 
     <!-- Content Layer -->
     <div class="hero-content">
-        <!-- Glitch status badge -->
+        <!-- Status badge -->
         <div class="status-badge" #statusBadge>
             <span class="status-dot"></span>
-            <span class="status-text">OPEN TO WORK</span>
+            <span class="status-text">Senior Software Engineer</span>
             <span class="status-line"></span>
         </div>
 
@@ -41,11 +47,20 @@
             </span>
         </h1>
 
-        <!-- Morphing tagline -->
-        <div class="tagline-morph" #tagline>
-            <span class="tagline-static">I architect </span>
-            <span class="tagline-dynamic" #dynamicText>{{ currentRole }}</span>
-            <span class="tagline-cursor">|</span>
+        <!-- Cyber Terminal Shell (Morphing Tagline) -->
+        <div class="terminal-shell" #tagline>
+            <div class="terminal-header">
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-yellow"></span>
+                <span class="terminal-dot dot-green"></span>
+                <span class="terminal-title">bash - core_architecture.sh</span>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-line"><span class="term-prompt">kaushalshah&#64;server:~$</span> ./init_profile.sh</div>
+                <div class="terminal-line text-brand-primary">
+                    <span class="term-arrow">></span> Building <span class="term-dynamic">{{ currentRole }}</span><span class="term-cursor">|</span>
+                </div>
+            </div>
         </div>
 
         <!-- Interactive CTA cluster -->
@@ -79,7 +94,7 @@
         </div>
     </div>
 
-    <!-- Floating stat orbs (interactive) -->
+    <!-- Floating HUD stat orbs -->
     <div class="stat-orbs">
         <div class="stat-orb" #statOrb1
             (mouseenter)="onOrbHover($event, 0)"
@@ -99,7 +114,7 @@
             <div class="orb-ring"></div>
             <div class="orb-content">
                 <span class="orb-number" #orbNum2>0</span>
-                <span class="orb-label">Production<br/>Systems</span>
+                <span class="orb-label">Prod<br/>Systems</span>
             </div>
         </div>
 
@@ -110,7 +125,7 @@
             <div class="orb-ring"></div>
             <div class="orb-content">
                 <span class="orb-number" #orbNum3>0</span>
-                <span class="orb-label">Tech<br/>Stack</span>
+                <span class="orb-label">Core<br/>Techs</span>
             </div>
         </div>
     </div>
@@ -124,97 +139,165 @@
 
 
 <!-- ═══════════════════════════════════════════════════════════════════ -->
-<!-- TECH DNA SECTION — Horizontal scroll with parallax depth           -->
+<!-- TECHNICAL DNA — Glassmorphic Bento Grid with Visualizers            -->
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 <section class="tech-dna-section" #techDnaSection>
     <div class="section-header" #techHeader>
-        <span class="section-tag">TECHNICAL DNA</span>
+        <span class="section-tag">[ TECHNICAL DNA ]</span>
         <h2 class="section-title">
             Systems I <span class="text-gradient">Engineer</span>
         </h2>
     </div>
 
-    <div class="tech-dna-track" #techTrack>
-        <!-- Frontend Pillar -->
-        <div class="dna-card" #dnaCard1>
-            <div class="dna-card-inner">
-                <div class="dna-card-number">01</div>
-                <div class="dna-card-icon">
-                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" role="img">
-                        <title>Frontend Engineering</title>
-                        <rect x="4" y="4" width="40" height="30" rx="3"/>
-                        <path d="M14 40h20M24 34v6"/>
-                        <path d="M16 16l4 4-4 4M22 24h6" stroke-width="2"/>
-                    </svg>
+    <div class="tech-bento-grid" #techTrack>
+        <!-- Card 1: Agentic AI & LLMs (Hero Bento Card - spans 2 columns) -->
+        <div class="bento-card bento-hero" #dnaCard1>
+            <div class="bento-card-inner">
+                <div class="bento-card-header">
+                    <span class="bento-number">01</span>
+                    <h3 class="bento-title">Agentic AI & LLMs</h3>
                 </div>
-                <h3 class="dna-card-title">Frontend<br/>Engineering</h3>
-                <div class="dna-card-techs">
-                    <span class="dna-tech" *ngFor="let tech of frontendTechs">{{ tech }}</span>
-                </div>
-                <div class="dna-card-line"></div>
-            </div>
-        </div>
+                <p class="bento-desc">
+                    Designing multi-agent orchestration structures, custom pipelines, and validation loops that automate business actions with precision.
+                </p>
 
-        <!-- Backend Pillar -->
-        <div class="dna-card" #dnaCard2>
-            <div class="dna-card-inner">
-                <div class="dna-card-number">02</div>
-                <div class="dna-card-icon">
-                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" role="img">
-                        <title>System Architecture</title>
-                        <rect x="8" y="6" width="32" height="10" rx="2"/>
-                        <rect x="8" y="19" width="32" height="10" rx="2"/>
-                        <rect x="8" y="32" width="32" height="10" rx="2"/>
-                        <circle cx="14" cy="11" r="1.5" fill="currentColor"/>
-                        <circle cx="14" cy="24" r="1.5" fill="currentColor"/>
-                        <circle cx="14" cy="37" r="1.5" fill="currentColor"/>
-                    </svg>
+                <!-- Live Agent Flow Visualizer -->
+                <div class="bento-visualizer agent-flow-container">
+                    <div class="node-wrapper">
+                        <div class="flow-node" [class.node-active]="activeAgentIndex === 0">
+                            <span class="node-label-abbr">INT</span>
+                            <span class="node-full-label">Intent</span>
+                        </div>
+                        <div class="flow-line" [class.line-active]="activeAgentIndex === 0"></div>
+                        
+                        <div class="flow-node" [class.node-active]="activeAgentIndex === 1">
+                            <span class="node-label-abbr">PLN</span>
+                            <span class="node-full-label">Planner</span>
+                        </div>
+                        <div class="flow-line" [class.line-active]="activeAgentIndex === 1"></div>
+                        
+                        <div class="flow-node" [class.node-active]="activeAgentIndex === 2">
+                            <span class="node-label-abbr">EXE</span>
+                            <span class="node-full-label">Executor</span>
+                        </div>
+                        <div class="flow-line" [class.line-active]="activeAgentIndex === 2"></div>
+                        
+                        <div class="flow-node" [class.node-active]="activeAgentIndex === 3">
+                            <span class="node-label-abbr">VAL</span>
+                            <span class="node-full-label">Validator</span>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="dna-card-title">System<br/>Architecture</h3>
-                <div class="dna-card-techs">
-                    <span class="dna-tech" *ngFor="let tech of backendTechs">{{ tech }}</span>
-                </div>
-                <div class="dna-card-line"></div>
-            </div>
-        </div>
 
-        <!-- Cloud Pillar -->
-        <div class="dna-card" #dnaCard3>
-            <div class="dna-card-inner">
-                <div class="dna-card-number">03</div>
-                <div class="dna-card-icon">
-                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" role="img">
-                        <title>Cloud & Automation</title>
-                        <path d="M12 36a8 8 0 01-1.5-15.87A12 12 0 0134 20h2a6 6 0 010 12H12z"/>
-                        <path d="M20 28v8M24 26v10M28 28v8" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                </div>
-                <h3 class="dna-card-title">Cloud &<br/>Automation</h3>
-                <div class="dna-card-techs">
-                    <span class="dna-tech" *ngFor="let tech of cloudTechs">{{ tech }}</span>
-                </div>
-                <div class="dna-card-line"></div>
-            </div>
-        </div>
-
-        <!-- AI Pillar -->
-        <div class="dna-card" #dnaCard4>
-            <div class="dna-card-inner">
-                <div class="dna-card-number">04</div>
-                <div class="dna-card-icon">
-                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" role="img">
-                        <title>Agentic AI</title>
-                        <circle cx="24" cy="24" r="4"/>
-                        <path d="M24 4v8M24 36v8M4 24h8M36 24h8"/>
-                        <path d="M10 10l6 6M32 32l6 6M10 38l6-6M32 16l6-6"/>
-                        <circle cx="24" cy="24" r="16"/>
-                    </svg>
-                </div>
-                <h3 class="dna-card-title">Agentic<br/>AI</h3>
-                <div class="dna-card-techs">
+                <div class="bento-tags">
                     <span class="dna-tech" *ngFor="let tech of aiTechs">{{ tech }}</span>
                 </div>
-                <div class="dna-card-line"></div>
+                <div class="bento-glow"></div>
+            </div>
+        </div>
+
+        <!-- Card 2: System Architecture (Spans 1 column) -->
+        <div class="bento-card" #dnaCard2>
+            <div class="bento-card-inner">
+                <div class="bento-card-header">
+                    <span class="bento-number">02</span>
+                    <h3 class="bento-title">System Architecture</h3>
+                </div>
+                <p class="bento-desc">
+                    Designing high-throughput backend pipelines with strict data models, repository patterns, and secure API gateways.
+                </p>
+
+                <!-- Database Schema Visualizer -->
+                <div class="bento-visualizer schema-visualizer">
+                    <div class="mini-table">
+                        <div class="table-hdr">users_db</div>
+                        <div class="table-col text-green-400">id : UUID [PK]</div>
+                        <div class="table-col">tenant_id : FK</div>
+                        <div class="table-col">hashed_pw : text</div>
+                    </div>
+                    <div class="schema-join">⇄</div>
+                    <div class="mini-table">
+                        <div class="table-hdr">session_logs</div>
+                        <div class="table-col text-blue-400">log_id : INT [PK]</div>
+                        <div class="table-col">user_id : UUID</div>
+                        <div class="table-col text-brand-primary">latency : 24ms</div>
+                    </div>
+                </div>
+
+                <div class="bento-tags">
+                    <span class="dna-tech" *ngFor="let tech of backendTechs">{{ tech }}</span>
+                </div>
+                <div class="bento-glow"></div>
+            </div>
+        </div>
+
+        <!-- Card 3: Frontend Engineering (Spans 1 column) -->
+        <div class="bento-card" #dnaCard3>
+            <div class="bento-card-inner">
+                <div class="bento-card-header">
+                    <span class="bento-number">03</span>
+                    <h3 class="bento-title">Frontend Engineering</h3>
+                </div>
+                <p class="bento-desc">
+                    Crafting highly responsive interfaces with smooth state transitions, reactive patterns, and accessible typography.
+                </p>
+
+                <!-- Mini Component Visualizer -->
+                <div class="bento-visualizer ui-visualizer">
+                    <div class="mock-ui-card">
+                        <div class="mock-bar"></div>
+                        <div class="mock-inputs">
+                            <span class="mock-dot-line"></span>
+                            <span class="mock-dot-line short"></span>
+                        </div>
+                        <div class="mock-slider-track">
+                            <span class="mock-slider-thumb"></span>
+                        </div>
+                        <div class="mock-btn">Active</div>
+                    </div>
+                </div>
+
+                <div class="bento-tags">
+                    <span class="dna-tech" *ngFor="let tech of frontendTechs">{{ tech }}</span>
+                </div>
+                <div class="bento-glow"></div>
+            </div>
+        </div>
+
+        <!-- Card 4: Cloud & Automation (Spans 2 columns) -->
+        <div class="bento-card bento-hero" #dnaCard4>
+            <div class="bento-card-inner">
+                <div class="bento-card-header">
+                    <span class="bento-number">04</span>
+                    <h3 class="bento-title">Cloud & Automation</h3>
+                </div>
+                <p class="bento-desc">
+                    Automating system deployments through CI/CD pipelines, containerized environments, and cloud provisioning.
+                </p>
+
+                <!-- CI/CD Pipeline Visualizer -->
+                <div class="bento-visualizer pipeline-visualizer">
+                    <div class="pipeline-step">
+                        <div class="step-circle active-pulse">Code</div>
+                        <div class="step-arrow-line"></div>
+                    </div>
+                    <div class="pipeline-step">
+                        <div class="step-circle active-pulse">Build</div>
+                        <div class="step-arrow-line"></div>
+                    </div>
+                    <div class="pipeline-step">
+                        <div class="step-circle active-pulse">Test</div>
+                        <div class="step-arrow-line"></div>
+                    </div>
+                    <div class="pipeline-step">
+                        <div class="step-circle active-pulse secure-step">Deploy</div>
+                    </div>
+                </div>
+
+                <div class="bento-tags">
+                    <span class="dna-tech" *ngFor="let tech of cloudTechs">{{ tech }}</span>
+                </div>
+                <div class="bento-glow"></div>
             </div>
         </div>
     </div>
@@ -222,11 +305,11 @@
 
 
 <!-- ═══════════════════════════════════════════════════════════════════ -->
-<!-- EXPERIENCE SECTION — Stacked reveal cards with depth               -->
+<!-- EXPERIENCE SECTION — Alternating Chronological Timeline             -->
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 <section id="experience" class="experience-section" #experienceSection>
     <div class="section-header" #expHeader>
-        <span class="section-tag">THE TRACK RECORD</span>
+        <span class="section-tag">[ THE TRACK RECORD ]</span>
         <h2 class="section-title">
             Engineering <span class="text-gradient">Timeline</span>
         </h2>
@@ -235,12 +318,12 @@
     <div class="exp-timeline">
         <div class="timeline-line" #timelineLine></div>
 
+        <!-- Experiences container with alternating classes -->
         <div class="exp-card" #expCard *ngFor="let exp of experiences; let i = index"
-            [attr.data-index]="i">
-            <div class="exp-card-inner"
-                (mouseenter)="onExpCardHover($event, i)"
-                (mouseleave)="onExpCardLeave(i)">
-
+            [attr.data-index]="i"
+            [ngClass]="i % 2 === 0 ? 'timeline-left' : 'timeline-right'">
+            
+            <div class="exp-card-inner">
                 <div class="exp-dot">
                     <div class="exp-dot-ring"></div>
                     <div class="exp-dot-core"></div>
@@ -254,6 +337,7 @@
                     <h3 class="exp-company">{{ exp.company }}</h3>
                     <h4 class="exp-role">{{ exp.role }}</h4>
                     <p class="exp-description">{{ exp.description }}</p>
+                    
                     <div class="exp-highlights" *ngIf="exp.highlights.length > 0">
                         <div class="exp-highlight" *ngFor="let h of exp.highlights">
                             <span class="exp-arrow">▹</span>
@@ -261,6 +345,8 @@
                         </div>
                     </div>
                 </div>
+                <!-- Blueprint grid decorative texture -->
+                <div class="card-grid-texture"></div>
             </div>
         </div>
     </div>
@@ -268,111 +354,246 @@
 
 
 <!-- ═══════════════════════════════════════════════════════════════════ -->
-<!-- PROJECTS SECTION — 3D Tilt cards with depth perception             -->
+<!-- PROJECTS SECTION — Immersive Mockups & Live Dashboards             -->
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 <section id="projects" class="projects-section" #projectsSection>
     <div class="section-header" #projHeader>
-        <span class="section-tag">CASE STUDIES</span>
+        <span class="section-tag">[ CASE STUDIES ]</span>
         <h2 class="section-title">
             Enterprise <span class="text-gradient">Portfolio</span>
         </h2>
     </div>
 
-    <div class="projects-grid">
-        <!-- Sparqal Orbit — Featured -->
-        <div class="project-card project-featured" #projectCard
-            (mousemove)="onProjectTilt($event, 0)"
-            (mouseleave)="onProjectTiltReset(0)">
-            <div class="project-card-inner" #projectInner0>
-                <div class="project-glow"></div>
-                <div class="project-badge">FEATURED</div>
-                <div class="project-header">
-                    <h3 class="project-name">Sparqal Orbit</h3>
-                    <p class="project-type">Multi-Tenant SaaS Platform</p>
-                </div>
-                <p class="project-desc">
-                    A robust multi-tenant SaaS platform for Instagram DM automation and AI-powered content scheduling.
-                    Engineered with Angular and Node.js, featuring secure tenant isolation and VPC-isolated database networks.
+    <div class="projects-grid-innovative">
+        <!-- 1. Sparqal Orbit — Featured SaaS Dashboard Mockup (Full Width) -->
+        <div class="featured-project-mockup" #projectCard>
+            <div class="featured-project-inner">
+                <div class="proj-badge">FEATURED PROJECT</div>
+                <h3 class="proj-name">Sparqal Orbit</h3>
+                <p class="proj-type">Multi-Tenant SaaS Automation Platform</p>
+                <p class="proj-desc">
+                    A robust marketing automation system for Instagram DM response workflows, multi-agent AI copy drafting, and automated content scheduling. Built with Angular 19, Node.js, and OpenAI API, using secure VPC configurations and isolated DB schemas.
                 </p>
                 <div class="project-tags">
-                    <span class="project-tag">Angular</span>
+                    <span class="project-tag">Angular 19</span>
                     <span class="project-tag">Node.js</span>
                     <span class="project-tag">OpenAI API</span>
                     <span class="project-tag">DigitalOcean</span>
                 </div>
-                <div class="project-meta-row">
-                    <span class="project-hash">#Scalability</span>
-                    <span class="project-hash">#AI-Automation</span>
-                    <span class="project-hash">#SaaS</span>
+
+                <!-- macOS UI Mockup containing a simulated dashboard -->
+                <div class="mockup-window">
+                    <div class="mockup-header">
+                        <div class="window-buttons">
+                            <span class="win-btn win-red"></span>
+                            <span class="win-btn win-yellow"></span>
+                            <span class="win-btn win-green"></span>
+                        </div>
+                        <div class="window-title">orbit.sparqal.com/dashboard/campaigns</div>
+                    </div>
+                    <div class="mockup-body">
+                        <!-- Left Mockup Sidebar -->
+                        <div class="mockup-sidebar">
+                            <div class="sidebar-item active-item">📊 Dashboard</div>
+                            <div class="sidebar-item">🤖 Agents</div>
+                            <div class="sidebar-item">📅 Scheduler</div>
+                            <div class="sidebar-item">⚙️ Settings</div>
+                        </div>
+                        
+                        <!-- Main Dashboard Area -->
+                        <div class="mockup-main">
+                            <div class="mockup-stats-row">
+                                <div class="m-stat-box">
+                                    <div class="m-stat-lbl">Active Agents</div>
+                                    <div class="m-stat-val text-brand-primary">4 / 4</div>
+                                </div>
+                                <div class="m-stat-box">
+                                    <div class="m-stat-lbl">DM Queue Uptime</div>
+                                    <div class="m-stat-val text-brand-secondary">99.98%</div>
+                                </div>
+                            </div>
+
+                            <!-- Live Workflow Activity Graph -->
+                            <div class="mockup-chart-container">
+                                <div class="chart-header">Automated Response Volume (24h)</div>
+                                <svg class="wave-chart" viewBox="0 0 300 80" aria-labelledby="chartTitle">
+                                    <title id="chartTitle">Automated Response Volume Chart</title>
+                                    <defs>
+                                        <linearGradient id="chartGlow" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.3"></stop>
+                                            <stop offset="100%" stop-color="#00f2fe" stop-opacity="0"></stop>
+                                        </linearGradient>
+                                    </defs>
+                                    <path d="M0,80 Q20,30 40,55 T80,40 T120,60 T160,20 T200,45 T240,15 T280,35 T300,20 L300,80 L0,80 Z" fill="url(#chartGlow)"></path>
+                                    <path d="M0,80 Q20,30 40,55 T80,40 T120,60 T160,20 T200,45 T240,15 T280,35 T300,20" fill="none" stroke="#00f2fe" stroke-width="2" class="chart-line-draw"></path>
+                                </svg>
+                            </div>
+
+                            <!-- Simulation Logs Box -->
+                            <div class="mockup-logs-panel">
+                                <div class="logs-header">
+                                    <span>SIMULATED AGENT LOOP</span>
+                                    <button class="simulate-btn" (click)="runOrbitSimulation()" [disabled]="isSimulatingOrbit">
+                                        {{ isSimulatingOrbit ? 'Running...' : 'Run Automation Simulation' }}
+                                    </button>
+                                </div>
+                                <div class="logs-terminal">
+                                    <div class="log-entry" *ngFor="let log of orbitLogs">
+                                        <span class="log-indicator">>></span> {{ log }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- V&S Apparel -->
-        <div class="project-card" #projectCard
-            (mousemove)="onProjectTilt($event, 1)"
-            (mouseleave)="onProjectTiltReset(1)">
-            <div class="project-card-inner" #projectInner1>
-                <div class="project-glow"></div>
+        <!-- 2. V&S Apparel — E-Commerce Engine with Currency & Geo Routing Demo -->
+        <div class="sub-project-card" #projectCard>
+            <div class="sub-project-inner">
                 <div class="project-header">
-                    <h3 class="project-name">V&S Apparel</h3>
-                    <p class="project-type">E-Commerce Engine</p>
+                    <h3 class="proj-name">V&S Apparel</h3>
+                    <p class="proj-type">Geo-Routed E-Commerce Engine</p>
                 </div>
-                <p class="project-desc">
-                    High-performance multi-tenant e-commerce platform featuring IP-based geo-routing,
-                    multi-currency pricing tiers (INR/USD), and automated WhatsApp lead-generation triggers.
+                <p class="proj-desc">
+                    High-performance multi-tenant storefront featuring IP-based geo-routing, localized currencies, dynamic tax calculations, and WhatsApp automation hooks for leads.
                 </p>
                 <div class="project-tags">
                     <span class="project-tag">AWS EC2</span>
-                    <span class="project-tag">Cloudflare DNS</span>
-                    <span class="project-tag">Geo-routing</span>
+                    <span class="project-tag">Cloudflare</span>
+                    <span class="project-tag">GeoDNS</span>
                     <span class="project-tag">MySQL</span>
                 </div>
+
+                <!-- Live Geo-routing Mockup -->
+                <div class="mini-app-mockup">
+                    <div class="geo-controls">
+                        <div class="geo-label">Simulate Customer Region:</div>
+                        <div class="geo-buttons">
+                            <button class="geo-btn" [class.geo-active]="activeGeoNode === 0" (click)="activeGeoNode = 0">USA (USD)</button>
+                            <button class="geo-btn" [class.geo-active]="activeGeoNode === 1" (click)="activeGeoNode = 1">INDIA (INR)</button>
+                        </div>
+                    </div>
+
+                    <div class="geo-routing-visual">
+                        <div class="user-node pulse-node">💻 Customer</div>
+                        <div class="routing-wire">
+                            <span class="pulse-packet" [class.packet-left]="activeGeoNode === 0" [class.packet-right]="activeGeoNode === 1"></span>
+                        </div>
+                        <div class="server-node" *ngIf="activeGeoNode === 0">🇺🇸 Edge Node [US_EAST]</div>
+                        <div class="server-node" *ngIf="activeGeoNode === 1">🇮🇳 Edge Node [AP_SOUTH]</div>
+                    </div>
+
+                    <div class="geo-output">
+                        Local Currency: <span class="text-brand-primary font-bold">{{ activeGeoNode === 0 ? '$49.99 USD' : '₹3,999 INR' }}</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Payment Approval System -->
-        <div class="project-card" #projectCard
-            (mousemove)="onProjectTilt($event, 2)"
-            (mouseleave)="onProjectTiltReset(2)">
-            <div class="project-card-inner" #projectInner2>
-                <div class="project-glow"></div>
+        <!-- 3. Payment Approval System — Security & Workflow Pipeline -->
+        <div class="sub-project-card" #projectCard>
+            <div class="sub-project-inner">
                 <div class="project-header">
-                    <h3 class="project-name">Payment Approval System</h3>
-                    <p class="project-type">Enterprise Workflow Engine</p>
+                    <h3 class="proj-name">Payment Approval System</h3>
+                    <p class="proj-type">Enterprise Workflow Engine</p>
                 </div>
-                <p class="project-desc">
-                    Secure 5-stage multi-role payment approval system. Deployed for national law firm networks,
-                    featuring Windows Authentication, event-driven alerts, and automated database auditing.
+                <p class="proj-desc">
+                    Secured 5-stage approval platform deployed across national legal networks. Integrated Windows Authentication and full event-driven audit logging.
                 </p>
                 <div class="project-tags">
-                    <span class="project-tag">.NET Core</span>
+                    <span class="project-tag">.NET 9</span>
                     <span class="project-tag">C#</span>
                     <span class="project-tag">SQL Server</span>
-                    <span class="project-tag">Windows Auth</span>
+                    <span class="project-tag">Active Directory</span>
+                </div>
+
+                <!-- Workflow approval pipeline visualizer -->
+                <div class="mini-app-mockup">
+                    <div class="pipeline-header">5-Stage Approval Security State</div>
+                    <div class="workflow-steps">
+                        <div class="w-step" [class.step-done]="activeApprovalStep >= 0" [class.step-current]="activeApprovalStep === 0">
+                            <span class="w-num">1</span> <span class="w-lbl">Draft</span>
+                        </div>
+                        <div class="w-step" [class.step-done]="activeApprovalStep >= 1" [class.step-current]="activeApprovalStep === 1">
+                            <span class="w-num">2</span> <span class="w-lbl">Mgr</span>
+                        </div>
+                        <div class="w-step" [class.step-done]="activeApprovalStep >= 2" [class.step-current]="activeApprovalStep === 2">
+                            <span class="w-num">3</span> <span class="w-lbl">VP</span>
+                        </div>
+                        <div class="w-step" [class.step-done]="activeApprovalStep >= 3" [class.step-current]="activeApprovalStep === 3">
+                            <span class="w-num">4</span> <span class="w-lbl">Aud</span>
+                        </div>
+                        <div class="w-step" [class.step-done]="activeApprovalStep >= 4" [class.step-current]="activeApprovalStep === 4">
+                            <span class="w-num">5</span> <span class="w-lbl">Paid</span>
+                        </div>
+                    </div>
+                    <div class="pipeline-security-log">
+                        <span class="text-green-500">✔ AUTHENTICATED:</span> NT_AUTHORITY\SYSTEM via WinAuth
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Speech Automation Middleware -->
-        <div class="project-card" #projectCard
-            (mousemove)="onProjectTilt($event, 3)"
-            (mouseleave)="onProjectTiltReset(3)">
-            <div class="project-card-inner" #projectInner3>
-                <div class="project-glow"></div>
+        <!-- 4. Speech Automation Middleware — Audio Waveform Integration -->
+        <div class="sub-project-card" #projectCard>
+            <div class="sub-project-inner">
                 <div class="project-header">
-                    <h3 class="project-name">Speech Automation Middleware</h3>
-                    <p class="project-type">Integration & RPA Middleware</p>
+                    <h3 class="proj-name">Speech Middleware</h3>
+                    <p class="proj-type">Integration & RPA Middleware</p>
                 </div>
-                <p class="project-desc">
-                    High-throughput dictation mapping middleware integrating Philips SpeechLive API with Actionstep CRM,
-                    automating transcription mappings and reducing onboarding time by 80%.
+                <p class="proj-desc">
+                    High-throughput transcription pipeline mapping dictation data from Philips SpeechLive to CRM entities, boosting onboarding efficiency.
                 </p>
                 <div class="project-tags">
                     <span class="project-tag">Node.js</span>
-                    <span class="project-tag">REST APIs</span>
                     <span class="project-tag">Actionstep API</span>
-                    <span class="project-tag">RPA Workflows</span>
+                    <span class="project-tag">REST APIs</span>
+                    <span class="project-tag">XML/JSON Mapping</span>
+                </div>
+
+                <!-- Animated Waveform Mockup -->
+                <div class="mini-app-mockup waveform-card-body">
+                    <div class="waveform-header">Audio Stream Analysis</div>
+                    
+                    <!-- SVG Waveform -->
+                    <div class="waveform-svg-container">
+                        <svg class="audio-waveform" viewBox="0 0 200 40" aria-label="Audio Waveform Visualization">
+                            <title>Audio Waveform Bars</title>
+                            <rect x="5" y="15" width="2" height="10" fill="#10b981" class="bar bar-1"></rect>
+                            <rect x="12" y="10" width="2" height="20" fill="#10b981" class="bar bar-2"></rect>
+                            <rect x="19" y="5" width="2" height="30" fill="#10b981" class="bar bar-3"></rect>
+                            <rect x="26" y="8" width="2" height="24" fill="#00f2fe" class="bar bar-4"></rect>
+                            <rect x="33" y="12" width="2" height="16" fill="#00f2fe" class="bar bar-5"></rect>
+                            <rect x="40" y="3" width="2" height="34" fill="#10b981" class="bar bar-6"></rect>
+                            <rect x="47" y="14" width="2" height="12" fill="#10b981" class="bar bar-7"></rect>
+                            <rect x="54" y="8" width="2" height="24" fill="#00f2fe" class="bar bar-8"></rect>
+                            <rect x="61" y="2" width="2" height="36" fill="#00f2fe" class="bar bar-9"></rect>
+                            <rect x="68" y="10" width="2" height="20" fill="#10b981" class="bar bar-10"></rect>
+                            <rect x="75" y="15" width="2" height="10" fill="#10b981" class="bar bar-1"></rect>
+                            <rect x="82" y="10" width="2" height="20" fill="#10b981" class="bar bar-2"></rect>
+                            <rect x="89" y="5" width="2" height="30" fill="#10b981" class="bar bar-3"></rect>
+                            <rect x="96" y="8" width="2" height="24" fill="#00f2fe" class="bar bar-4"></rect>
+                            <rect x="103" y="12" width="2" height="16" fill="#00f2fe" class="bar bar-5"></rect>
+                            <rect x="110" y="3" width="2" height="34" fill="#10b981" class="bar bar-6"></rect>
+                            <rect x="117" y="14" width="2" height="12" fill="#10b981" class="bar bar-7"></rect>
+                            <rect x="124" y="8" width="2" height="24" fill="#00f2fe" class="bar bar-8"></rect>
+                            <rect x="131" y="2" width="2" height="36" fill="#00f2fe" class="bar bar-9"></rect>
+                            <rect x="138" y="10" width="2" height="20" fill="#10b981" class="bar bar-10"></rect>
+                            <rect x="145" y="15" width="2" height="10" fill="#10b981" class="bar bar-1"></rect>
+                            <rect x="152" y="10" width="2" height="20" fill="#10b981" class="bar bar-2"></rect>
+                            <rect x="159" y="5" width="2" height="30" fill="#10b981" class="bar bar-3"></rect>
+                            <rect x="166" y="8" width="2" height="24" fill="#00f2fe" class="bar bar-4"></rect>
+                            <rect x="173" y="12" width="2" height="16" fill="#00f2fe" class="bar bar-5"></rect>
+                            <rect x="180" y="3" width="2" height="34" fill="#10b981" class="bar bar-6"></rect>
+                            <rect x="187" y="15" width="2" height="10" fill="#10b981" class="bar bar-1"></rect>
+                        </svg>
+                    </div>
+
+                    <div class="mapping-log font-mono">
+                        TRANSCRIPTION_STREAM_OK // 256kbps parsed.
+                    </div>
                 </div>
             </div>
         </div>

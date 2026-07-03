@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,8 +9,14 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   isMenuOpen = false;
+  isScrolled = false;
 
   constructor(private router: Router) { }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    this.isScrolled = window.scrollY > 20;
+  }
 
   scrollToSection(sectionId: string): void {
     this.isMenuOpen = false; // Mobile menu band kar do
@@ -43,6 +49,6 @@ export class HeaderComponent {
   }
 
   downloadResume(): void {
-    window.open('https://drive.google.com/file/d/1Kn7SNEy8aLcydYLJteR2JSz3yR9tNVNq/view', '_blank');
+    window.open('https://drive.google.com/file/d/14tGGhlNSUE9oNGNwUumY2STr0jn3r3Qn/view', '_blank');
   }
 }

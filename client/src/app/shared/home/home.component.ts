@@ -75,17 +75,36 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private targetMouseX = 0;
   private targetMouseY = 0;
 
+  // ─── Interactive Bento & Card States ───
+  activeAgentIndex = 0;
+  private agentInterval: any;
+
+  // Sparqal Orbit Simulation
+  orbitLogs: string[] = [
+    'SYSTEM READY // Waiting for user command...'
+  ];
+  isSimulatingOrbit = false;
+  private simulationTimeout: any;
+
+  // V&S Apparel Geo Routing Simulation
+  activeGeoNode = 0;
+  private geoInterval: any;
+
+  // Payment approval step
+  activeApprovalStep = 2; // VP review is active
+  private approvalInterval: any;
+
   // ─── Data ───
   headlineChars1: string[] = [];
   headlineChars2: string[] = [];
 
   currentRole = '';
   private roles = [
-    'Senior Software Developer',
-    'Senior Software Engineer',
-    'Full-Stack Architect',
-    'Scalable Systems',
-    'Agentic AI Solutions'
+    'scalable systems & full-stack applications',
+    'autonomous agentic AI workflows',
+    'high-throughput backend APIs',
+    'cloud-native serverless pipelines',
+    'secure enterprise architectures'
   ];
   private roleIndex = 0;
   private charIndex = 0;
@@ -188,6 +207,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.startParticleLoop();
     this.setupHeroAnimations();
     this.setupScrollAnimations();
+    this.startBentoSimulations();
 
     // Start typing effect after tick to avoid NG0100 error
     setTimeout(() => this.startTypingEffect(), 0);
@@ -196,6 +216,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     cancelAnimationFrame(this.animFrameId);
     clearTimeout(this.typeTimeout);
+    clearTimeout(this.simulationTimeout);
+    clearInterval(this.agentInterval);
+    clearInterval(this.geoInterval);
+    clearInterval(this.approvalInterval);
     ScrollTrigger.getAll().forEach(t => t.kill());
   }
 
@@ -669,7 +693,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       button_name: 'Download Resume',
       location: 'Hero Section'
     });
-    window.open('https://drive.google.com/file/d/1Kn7SNEy8aLcydYLJteR2JSz3yR9tNVNq/view', '_blank');
+    window.open('https://drive.google.com/file/d/14tGGhlNSUE9oNGNwUumY2STr0jn3r3Qn/view', '_blank');
   }
 
   openLinkedIn(): void {
@@ -678,6 +702,55 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       location: 'Hero Section'
     });
     window.open('https://www.linkedin.com/in/mrkaushalshah/', '_blank');
+  }
+
+  // ─── BENTO & PROJECT CARD SIMULATIONS ───
+  startBentoSimulations(): void {
+    // 1. Agent cycle in Bento Grid
+    this.agentInterval = setInterval(() => {
+      this.activeAgentIndex = (this.activeAgentIndex + 1) % 4;
+    }, 3000);
+
+    // 2. E-commerce geo-node toggle
+    this.geoInterval = setInterval(() => {
+      this.activeGeoNode = (this.activeGeoNode + 1) % 2;
+    }, 2500);
+
+    // 3. Payment Approval workflow cycle
+    this.approvalInterval = setInterval(() => {
+      this.activeApprovalStep = (this.activeApprovalStep + 1);
+      if (this.activeApprovalStep > 4) {
+        this.activeApprovalStep = 0;
+      }
+    }, 4000);
+  }
+
+  // Orbit AI Agent Log simulation
+  runOrbitSimulation(): void {
+    if (this.isSimulatingOrbit) return;
+    this.isSimulatingOrbit = true;
+    this.orbitLogs = ['SYSTEM // Starting multi-agent campaign simulation...'];
+
+    const simulationSteps = [
+      { text: 'AGENT_ORBIT // Fetching brand assets & target audience context...', delay: 1000 },
+      { text: 'LLM_GEN // Content outline draft created: "Next-Gen AI Systems"', delay: 2000 },
+      { text: 'IMAGE_AGENT // Running text-to-image prompt: "glowing server matrix"', delay: 3500 },
+      { text: 'SCHEDULER // Uploading content nodes to Instagram graph API queue...', delay: 5000 },
+      { text: 'VPC_SUCCESS // Content scheduled successfully for 18:00 UTC.', delay: 6500 },
+      { text: 'SYSTEM READY // Simulation finished. Loop idle.', delay: 8000 }
+    ];
+
+    simulationSteps.forEach(step => {
+      this.simulationTimeout = setTimeout(() => {
+        this.orbitLogs.push(step.text);
+        if (this.orbitLogs.length > 5) {
+          this.orbitLogs.shift();
+        }
+        if (step.text.includes('SYSTEM READY')) {
+          this.isSimulatingOrbit = false;
+        }
+      }, step.delay);
+    });
   }
 
   openLiveSite(): void {

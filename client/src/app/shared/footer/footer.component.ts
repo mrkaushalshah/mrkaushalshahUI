@@ -31,7 +31,7 @@ export class FooterComponent {
 
     downloadResume(): void {
         this.trackClick('Download Resume Button');
-        window.open('https://drive.google.com/file/d/1Kn7SNEy8aLcydYLJteR2JSz3yR9tNVNq/view', '_blank');
+        window.open('https://drive.google.com/file/d/14tGGhlNSUE9oNGNwUumY2STr0jn3r3Qn/view', '_blank');
     }
 
 }

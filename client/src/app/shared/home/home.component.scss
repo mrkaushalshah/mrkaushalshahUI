@@ -1,15 +1,17 @@
 // ═══════════════════════════════════════════════════════════════════
-// VARIABLES
+// VARIABLES & COLOR SCHEME
 // ═══════════════════════════════════════════════════════════════════
-$brand: #10b981;
-$brand-secondary: #3b82f6;
-$surface-950: #0a0a0a;
-$surface-900: #111111;
-$surface-800: #1a1a1a;
-$surface-700: #262626;
+$brand: #10b981;          // Neon Emerald Green
+$brand-secondary: #00f2fe; // Electric Cyan
+$brand-accent: #a855f7;    // Cyber Purple
+$surface-950: #030712;     // Deep Slate Black
+$surface-900: #080d1a;     // Deep Blue-Grey Card Background
+$surface-800: #0d1527;     // Glassmorphic Inner Frame Background
+$surface-700: #1e293b;
+$border-color: rgba(255, 255, 255, 0.05);
 
 // ═══════════════════════════════════════════════════════════════════
-// HERO UNIVERSE
+// HERO UNIVERSE (CONTAINER & CANVAS)
 // ═══════════════════════════════════════════════════════════════════
 .hero-universe {
     position: relative;
@@ -19,7 +21,7 @@ $surface-700: #262626;
     justify-content: center;
     background: $surface-950;
     overflow: hidden;
-    cursor: none;
+    cursor: crosshair;
 }
 
 .particle-canvas {
@@ -32,41 +34,111 @@ $surface-700: #262626;
 
 .cursor-glow {
     position: absolute;
-    width: 600px;
-    height: 600px;
+    width: 500px;
+    height: 500px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba($brand, 0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba($brand-secondary, 0.08) 0%, transparent 70%);
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 2;
-    transition: opacity 0.3s ease;
+    mix-blend-mode: screen;
 }
 
-.grid-overlay {
+// ═══════════════════════════════════════════════════════════════════
+// FUTURISTIC HUD OVERLAY
+// ═══════════════════════════════════════════════════════════════════
+.hud-overlay {
     position: absolute;
     inset: 0;
-    background-image:
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 60px 60px;
-    z-index: 2;
+    pointer-events: none;
+    z-index: 3;
+
+    .grid-overlay {
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+        background-size: 80px 80px;
+    }
+
+    .hud-corner {
+        position: absolute;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.3);
+        letter-spacing: 0.1em;
+        padding: 20px;
+        text-shadow: 0 0 5px rgba($brand-secondary, 0.3);
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: rgba(255, 255, 255, 0.15);
+            border-style: solid;
+        }
+    }
+
+    .hud-tl {
+        top: 20px;
+        left: 20px;
+        &::before {
+            top: 10px;
+            left: 10px;
+            border-width: 2px 0 0 2px;
+        }
+    }
+
+    .hud-tr {
+        top: 20px;
+        right: 20px;
+        &::before {
+            top: 10px;
+            right: 10px;
+            border-width: 2px 2px 0 0;
+        }
+    }
+
+    .hud-bl {
+        bottom: 20px;
+        left: 20px;
+        &::before {
+            bottom: 10px;
+            left: 10px;
+            border-width: 0 0 2px 2px;
+        }
+    }
+
+    .hud-br {
+        bottom: 20px;
+        right: 20px;
+        &::before {
+            bottom: 10px;
+            right: 10px;
+            border-width: 0 2px 2px 0;
+        }
+    }
 }
 
-// Orbiting rings
+// Orbiting HUD Rings
 .orbit-ring {
     position: absolute;
     border-radius: 50%;
-    border: 1px solid rgba($brand, 0.06);
+    border: 1px solid rgba($brand-secondary, 0.04);
     z-index: 2;
     animation: orbit-spin linear infinite;
+    pointer-events: none;
 
     &-1 {
-        width: 500px;
-        height: 500px;
+        width: 450px;
+        height: 450px;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        animation-duration: 30s;
+        animation-duration: 40s;
+        border-color: rgba($brand, 0.05);
     }
 
     &-2 {
@@ -75,54 +147,51 @@ $surface-700: #262626;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        animation-duration: 45s;
+        animation-duration: 60s;
         animation-direction: reverse;
-        border-color: rgba($brand-secondary, 0.04);
+        border-color: rgba($brand-accent, 0.03);
     }
 
     &-3 {
-        width: 900px;
-        height: 900px;
+        width: 1000px;
+        height: 1000px;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        animation-duration: 60s;
+        animation-duration: 80s;
         border-style: dashed;
-        border-color: rgba(white, 0.02);
+        border-color: rgba(255, 255, 255, 0.015);
     }
 }
 
 @keyframes orbit-spin {
-    from {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-
-    to {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 // ═══════════════════════════════════════════════════════════════════
-// HERO CONTENT
+// HERO CORE CONTENT
 // ═══════════════════════════════════════════════════════════════════
 .hero-content {
     position: relative;
     z-index: 10;
     text-align: center;
-    max-width: 900px;
+    max-width: 1000px;
     padding: 0 24px;
 }
 
-// Status badge
+// Online engineering status badge
 .status-badge {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 20px;
-    border: 1px solid rgba($brand, 0.2);
+    gap: 12px;
+    padding: 8px 24px;
+    border: 1px solid rgba($brand, 0.15);
     border-radius: 999px;
-    background: rgba($brand, 0.05);
-    margin-bottom: 40px;
+    background: rgba($brand, 0.04);
+    backdrop-filter: blur(8px);
+    margin-bottom: 30px;
+    box-shadow: 0 0 15px rgba($brand, 0.05);
     opacity: 0;
 
     .status-dot {
@@ -135,165 +204,181 @@ $surface-700: #262626;
         &::before {
             content: '';
             position: absolute;
-            inset: -3px;
+            inset: -4px;
             border-radius: 50%;
             background: $brand;
             animation: pulse-ring 2s ease-out infinite;
-            opacity: 0;
         }
     }
 
     .status-text {
-        font-family: 'JetBrains Mono', monospace;
+        font-family: 'Share Tech Mono', monospace;
         font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.2em;
-        color: $brand;
+        font-weight: bold;
+        letter-spacing: 0.15em;
         text-transform: uppercase;
-    }
-
-    .status-line {
-        width: 30px;
-        height: 1px;
-        background: linear-gradient(90deg, rgba($brand, 0.5), transparent);
+        color: rgba(255, 255, 255, 0.85);
     }
 }
 
 @keyframes pulse-ring {
-    0% {
-        transform: scale(1);
-        opacity: 0.6;
-    }
-
-    100% {
-        transform: scale(2.5);
-        opacity: 0;
-    }
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
 }
 
-// Giant headline
+// Kinetic Interactive Headline
 .headline-wrapper {
-    margin-bottom: 32px;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+    user-select: none;
 }
 
 .headline-line {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 0;
-    font-size: clamp(48px, 10vw, 120px);
+    font-family: 'Outfit', sans-serif;
+    font-size: 12vw;
+    line-height: 0.95;
     font-weight: 900;
-    line-height: 1.05;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.05em;
     color: white;
-    margin: 0;
-    padding: 0;
+
+    @media (min-width: 768px) {
+        font-size: 7.5rem;
+    }
 }
 
 .headline-gradient {
+    text-shadow: none;
+
     .headline-word {
-        background: linear-gradient(135deg, $brand, $brand-secondary, #8b5cf6);
+        background: linear-gradient(135deg, $brand-secondary, $brand, $brand-accent);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: transparent;
     }
 }
 
 .headline-word {
     display: inline-block;
+    transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.15s, text-shadow 0.15s;
     cursor: default;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    will-change: transform;
-    white-space: pre;
 
     &:hover {
-        transform: translateY(-8px) scale(1.1) !important;
+        transform: scale(1.15) translateY(-5px);
+        color: $brand-secondary;
+        text-shadow: 0 0 25px rgba($brand-secondary, 0.5);
     }
 }
 
-// Morphing tagline
-.tagline-morph {
-    font-size: 18px;
-    color: rgba(white, 0.5);
-    margin-bottom: 48px;
-    font-weight: 500;
+// Interactive Code Shell Terminal (Morphing tagline)
+.terminal-shell {
+    max-width: 580px;
+    width: 100%;
+    margin: 20px auto 40px;
+    background: rgba($surface-900, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba($brand-secondary, 0.03);
+    backdrop-filter: blur(12px);
+    overflow: hidden;
     opacity: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
 
-    .tagline-dynamic {
-        color: $brand;
-        font-weight: 700;
-        min-width: 180px;
-        display: inline-block;
+    .terminal-header {
+        display: flex;
+        align-items: center;
+        padding: 10px 16px;
+        background: rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+        .terminal-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #f59e0b; }
+        .dot-green { background: #10b981; }
+
+        .terminal-title {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-left: auto;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
     }
 
-    .tagline-cursor {
-        color: $brand;
-        animation: blink-cursor 1s step-end infinite;
-        font-weight: 300;
+    .terminal-body {
+        padding: 20px;
+        text-align: left;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 14px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.85);
+
+        .term-prompt {
+            color: $brand-accent;
+        }
+
+        .term-arrow {
+            color: $brand;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+
+        .term-dynamic {
+            color: $brand-secondary;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba($brand-secondary, 0.2);
+        }
+
+        .term-cursor {
+            display: inline-block;
+            width: 8px;
+            background: $brand-secondary;
+            margin-left: 4px;
+            animation: caret-blink 1s steps(2, start) infinite;
+        }
     }
 }
 
-@keyframes blink-cursor {
-
-    0%,
-    50% {
-        opacity: 1;
-    }
-
-    51%,
-    100% {
-        opacity: 0;
-    }
+@keyframes caret-blink {
+    to { visibility: hidden; }
 }
 
-// ═══════════════════════════════════════════════════════════════════
-// CTA BUTTONS
-// ═══════════════════════════════════════════════════════════════════
+// CTA Buttons
 .cta-cluster {
     display: flex;
     justify-content: center;
     gap: 20px;
-    flex-wrap: wrap;
     opacity: 0;
 }
 
 .cta-magnetic {
     position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 16px 36px;
+    padding: 14px 32px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, $brand, darken($brand, 10%));
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
     border: none;
-    border-radius: 16px;
     cursor: pointer;
     overflow: hidden;
-    outline: none;
-    font-family: 'Inter', sans-serif;
-    transition: box-shadow 0.4s ease;
-
-    .cta-bg {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, $brand, #0d9668);
-        z-index: 0;
-        transition: transform 0.3s ease;
-    }
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+    box-shadow: 0 10px 20px rgba($brand, 0.15);
 
     .cta-text {
         position: relative;
         z-index: 2;
-        font-size: 14px;
-        font-weight: 800;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        color: #000;
-        display: flex;
+        display: inline-flex;
         align-items: center;
         gap: 8px;
     }
@@ -305,741 +390,1419 @@ $surface-700: #262626;
 
     .cta-shimmer {
         position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(white, 0.25), transparent);
-        z-index: 1;
-        animation: shimmer 3s infinite;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
     }
 
     &:hover {
-        box-shadow: 0 0 40px rgba($brand, 0.3), 0 8px 32px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 15px 30px rgba($brand, 0.3), 0 0 20px rgba($brand, 0.2);
+        
+        .cta-shimmer {
+            transform: translateX(100%);
+        }
     }
 
     &.cta-outline {
-        background: transparent;
-        border: 1px solid rgba(white, 0.1);
-
-        .cta-bg {
-            display: none;
-        }
-
-        .cta-shimmer {
-            display: none;
-        }
-
-        .cta-text {
-            color: white;
-
-            .cta-icon {
-                stroke: white;
-            }
-        }
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: none;
+        color: rgba(255, 255, 255, 0.9);
 
         &:hover {
-            border-color: rgba($brand, 0.4);
-            background: rgba(white, 0.03);
-            box-shadow: 0 0 30px rgba($brand, 0.1);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba($brand-secondary, 0.4);
+            color: white;
+            box-shadow: 0 10px 20px rgba($brand-secondary, 0.05);
         }
     }
 }
 
-@keyframes shimmer {
-    0% {
-        left: -100%;
-    }
-
-    40% {
-        left: 100%;
-    }
-
-    100% {
-        left: 100%;
-    }
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// FLOATING STAT ORBS
-// ═══════════════════════════════════════════════════════════════════
+// Float HUD Stat Orbs
 .stat-orbs {
     position: absolute;
-    inset: 0;
-    z-index: 8;
-    pointer-events: none;
+    bottom: 8%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    max-width: 900px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    pointer-events: auto;
+
+    @media (max-width: 768px) {
+        display: none; // Hide on mobile to conserve screen space
+    }
 }
 
 .stat-orb {
-    position: absolute;
-    width: 140px;
-    height: 140px;
+    position: relative;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    pointer-events: all;
-    cursor: pointer;
+    background: rgba($surface-900, 0.6);
+    border: 1px solid rgba($brand-secondary, 0.1);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s;
     opacity: 0;
-
-    // Positions
-    top: 15%;
-    right: 10%;
-
-    &-2 {
-        top: auto;
-        right: auto;
-        bottom: 20%;
-        left: 8%;
-    }
-
-    &-3 {
-        top: auto;
-        right: 15%;
-        bottom: 15%;
-    }
 
     .orb-glow {
         position: absolute;
-        inset: -20px;
+        inset: -2px;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba($brand, 0.1) 0%, transparent 70%);
-        transition: all 0.4s ease;
+        background: radial-gradient(circle, rgba($brand-secondary, 0.1) 0%, transparent 70%);
+        opacity: 0;
+        transition: opacity 0.3s;
     }
 
     .orb-ring {
         position: absolute;
-        inset: 0;
+        inset: 4px;
         border-radius: 50%;
-        border: 1px solid rgba($brand, 0.15);
-        transition: all 0.4s ease;
-        animation: orb-rotate 10s linear infinite;
-        border-top-color: rgba($brand, 0.4);
+        border: 1px dashed rgba(255, 255, 255, 0.05);
+        animation: orbit-spin 20s linear infinite;
     }
 
     .orb-content {
         position: relative;
         z-index: 2;
         text-align: center;
-    }
 
-    .orb-number {
-        display: block;
-        font-size: 28px;
-        font-weight: 900;
-        color: white;
-        line-height: 1;
-    }
+        .orb-number {
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            color: white;
+            line-height: 1.1;
+        }
 
-    .orb-label {
-        display: block;
-        font-size: 9px;
-        font-family: 'JetBrains Mono', monospace;
-        color: rgba(white, 0.4);
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        margin-top: 4px;
-        line-height: 1.3;
+        .orb-label {
+            display: block;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 9px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 2px;
+            line-height: 1.2;
+        }
     }
 
     &:hover {
+        transform: translateY(-8px);
+        border-color: $brand-secondary;
+        box-shadow: 0 10px 25px rgba($brand-secondary, 0.1);
+
         .orb-glow {
-            transform: scale(1.5);
-            background: radial-gradient(circle, rgba($brand, 0.2) 0%, transparent 70%);
+            opacity: 1;
         }
-
         .orb-ring {
-            border-color: rgba($brand, 0.4);
-            transform: scale(1.1);
+            border-color: rgba($brand-secondary, 0.2);
         }
     }
 }
 
-@keyframes orb-rotate {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-// Scroll beacon
+// Beacon scroll indicator
 .scroll-beacon {
     position: absolute;
-    bottom: 40px;
+    bottom: 24px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 10;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
+    z-index: 10;
     opacity: 0;
+
+    .scroll-label {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.3);
+        letter-spacing: 0.25em;
+    }
 
     .scroll-line {
         width: 1px;
-        height: 40px;
-        background: linear-gradient(to bottom, rgba($brand, 0.5), transparent);
-        animation: scroll-pulse 2s ease-in-out infinite;
-    }
+        height: 60px;
+        background: linear-gradient(to bottom, $brand-secondary, transparent);
+        position: relative;
+        overflow: hidden;
 
-    .scroll-label {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 9px;
-        letter-spacing: 0.3em;
-        color: rgba(white, 0.3);
-        text-transform: uppercase;
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: white;
+            animation: scroll-ping 2s ease-in-out infinite;
+        }
     }
 }
 
-@keyframes scroll-pulse {
-
-    0%,
-    100% {
-        transform: scaleY(1);
-        opacity: 1;
-    }
-
-    50% {
-        transform: scaleY(0.5);
-        opacity: 0.3;
-    }
+@keyframes scroll-ping {
+    0% { transform: translateY(-20px); }
+    100% { transform: translateY(60px); }
 }
 
 
 // ═══════════════════════════════════════════════════════════════════
-// SECTION SHARED STYLES
+// GLOBAL SECTION LAYOUT STYLES
 // ═══════════════════════════════════════════════════════════════════
 .section-header {
-    max-width: 1200px;
-    margin: 0 auto 80px;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 60px;
     padding: 0 24px;
-    opacity: 0;
-}
 
-.section-tag {
-    display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    color: $brand;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    position: relative;
-    padding-left: 32px;
-
-    &::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        width: 20px;
-        height: 1px;
-        background: $brand;
+    .section-tag {
+        display: block;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 12px;
+        color: $brand-secondary;
+        letter-spacing: 0.15em;
+        margin-bottom: 12px;
+        text-shadow: 0 0 10px rgba($brand-secondary, 0.2);
     }
-}
 
-.section-title {
-    font-size: clamp(36px, 6vw, 64px);
-    font-weight: 900;
-    color: white;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-}
+    .section-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: 36px;
+        font-weight: 800;
+        color: white;
 
-.text-gradient {
-    background: linear-gradient(135deg, $brand, $brand-secondary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+        @media (min-width: 768px) {
+            font-size: 48px;
+        }
+    }
+
+    .text-gradient {
+        background: linear-gradient(135deg, $brand, $brand-secondary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 }
 
 
 // ═══════════════════════════════════════════════════════════════════
-// TECH DNA SECTION
+// TECHNICAL DNA (BENTO GRID SYSTEM)
 // ═══════════════════════════════════════════════════════════════════
 .tech-dna-section {
-    padding: 120px 0;
-    background: $surface-900;
-    overflow: hidden;
+    padding: 100px 0;
+    background: linear-gradient(to bottom, $surface-950, #040813);
     position: relative;
-    border-top: 1px solid rgba(white, 0.03);
-    border-bottom: 1px solid rgba(white, 0.03);
 }
 
-.tech-dna-track {
+.tech-bento-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr;
     gap: 24px;
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 0 24px;
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-.dna-card {
-    perspective: 1000px;
-    opacity: 0;
-}
-
-.dna-card-inner {
-    background: rgba($surface-800, 0.5);
-    border: 1px solid rgba(white, 0.05);
-    border-radius: 24px;
-    padding: 40px 32px;
+.bento-card {
     position: relative;
+    border-radius: 20px;
+    background: rgba($surface-900, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
     overflow: hidden;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    cursor: default;
+    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
 
-    &::before {
-        content: '';
+    &.bento-hero {
+        @media (min-width: 768px) {
+            grid-column: span 2;
+        }
+    }
+
+    .bento-card-inner {
+        padding: 32px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        z-index: 2;
+    }
+
+    .bento-card-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+
+        .bento-number {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .bento-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+        }
+    }
+
+    .bento-desc {
+        font-size: 14px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 24px;
+    }
+
+    .bento-tags {
+        margin-top: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        .dna-tech {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 4px 10px;
+            border-radius: 6px;
+            transition: color 0.2s, border-color 0.2s;
+
+            &:hover {
+                color: $brand-secondary;
+                border-color: rgba($brand-secondary, 0.3);
+            }
+        }
+    }
+
+    .bento-glow {
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, rgba($brand, 0.3), transparent);
+        inset: 0;
+        background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba($brand-secondary, 0.08) 0%, transparent 60%);
         opacity: 0;
-        transition: opacity 0.4s;
+        transition: opacity 0.3s;
+        pointer-events: none;
     }
 
     &:hover {
-        border-color: rgba($brand, 0.2);
-        transform: translateY(-8px);
-        background: rgba($surface-800, 0.8);
+        transform: translateY(-5px);
+        border-color: rgba($brand-secondary, 0.2);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba($brand-secondary, 0.02);
 
-        &::before {
+        .bento-glow {
             opacity: 1;
         }
+    }
+}
 
-        .dna-card-line {
-            transform: scaleX(1);
+// ─── Bento Visualizers ───
+.bento-visualizer {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+// 1. Agent Flow Visualizer
+.agent-flow-container {
+    .node-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .flow-node {
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        transition: all 0.3s;
+
+        .node-label-abbr {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            font-weight: bold;
+            color: rgba(255,255,255,0.4);
         }
 
-        .dna-card-icon {
+        .node-full-label {
+            position: absolute;
+            bottom: -22px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 9px;
+            color: rgba(255,255,255,0.3);
+            white-space: nowrap;
+        }
+
+        &.node-active {
+            background: rgba($brand, 0.1);
+            border-color: $brand;
+            box-shadow: 0 0 15px rgba($brand, 0.3);
             transform: scale(1.1);
+
+            .node-label-abbr { color: $brand; }
+            .node-full-label { color: rgba(255, 255, 255, 0.8); }
+        }
+    }
+
+    .flow-line {
+        flex: 1;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.05);
+        margin: 0 8px;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: $brand;
+            transition: width 0.3s ease;
+        }
+
+        &.line-active::after {
+            width: 100%;
+            animation: line-pulse 1.5s infinite;
         }
     }
 }
 
-.dna-card-number {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 64px;
-    font-weight: 900;
-    color: rgba(white, 0.03);
-    position: absolute;
-    top: 16px;
-    right: 24px;
-    line-height: 1;
+@keyframes line-pulse {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
 }
 
-.dna-card-icon {
-    width: 48px;
-    height: 48px;
-    color: $brand;
-    margin-bottom: 24px;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.dna-card-title {
-    font-size: 24px;
-    font-weight: 800;
-    color: white;
-    line-height: 1.2;
-    margin-bottom: 24px;
-    letter-spacing: -0.02em;
-}
-
-.dna-card-techs {
+// 2. Schema Table Visualizer
+.schema-visualizer {
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-.dna-tech {
-    padding: 6px 14px;
-    background: rgba(white, 0.04);
-    border: 1px solid rgba(white, 0.06);
-    border-radius: 999px;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Share Tech Mono', monospace;
     font-size: 11px;
-    font-family: 'JetBrains Mono', monospace;
-    color: rgba(white, 0.5);
-    transition: all 0.3s;
 
-    &:hover {
-        color: $brand;
-        border-color: rgba($brand, 0.3);
-        background: rgba($brand, 0.05);
+    .mini-table {
+        background: rgba(255, 255, 255, 0.01);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 6px;
+        overflow: hidden;
+        width: 130px;
+
+        .table-hdr {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px 8px;
+            color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-weight: bold;
+        }
+
+        .table-col {
+            padding: 4px 8px;
+            color: rgba(255, 255, 255, 0.4);
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.02);
+            &:last-child { border: none; }
+        }
+    }
+
+    .schema-join {
+        color: $brand-secondary;
+        font-size: 16px;
+        animation: glow-ping 2s infinite ease-in-out;
     }
 }
 
-.dna-card-line {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, $brand, $brand-secondary);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+@keyframes glow-ping {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
+}
+
+// 3. UI Component Visualizer
+.ui-visualizer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .mock-ui-card {
+        width: 160px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 8px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .mock-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .mock-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            .mock-dot-line {
+                height: 4px;
+                background: rgba(255, 255, 255, 0.04);
+                border-radius: 2px;
+                width: 70%;
+                &.short { width: 45%; }
+            }
+        }
+
+        .mock-slider-track {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 2px;
+            position: relative;
+            margin: 6px 0;
+
+            .mock-slider-thumb {
+                position: absolute;
+                top: 50%;
+                left: 70%;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: $brand-secondary;
+                transform: translate(-50%, -50%);
+                box-shadow: 0 0 10px rgba($brand-secondary, 0.5);
+                animation: slider-slide 4s infinite ease-in-out;
+            }
+        }
+
+        .mock-btn {
+            background: rgba($brand-secondary, 0.08);
+            border: 1px solid $brand-secondary;
+            color: $brand-secondary;
+            text-align: center;
+            font-size: 9px;
+            font-family: 'Share Tech Mono', monospace;
+            padding: 4px 0;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+    }
+}
+
+@keyframes slider-slide {
+    0%, 100% { left: 20%; }
+    50% { left: 80%; }
+}
+
+// 4. CI/CD Pipeline Visualizer
+.pipeline-visualizer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .pipeline-step {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        &:last-child { flex: none; }
+    }
+
+    .step-circle {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.4);
+        position: relative;
+        transition: all 0.3s;
+
+        &.active-pulse {
+            background: rgba($brand-accent, 0.04);
+            border-color: rgba($brand-accent, 0.4);
+            color: rgba(255,255,255,0.8);
+            animation: border-sparkle 3s infinite alternate;
+        }
+
+        &.secure-step {
+            border-color: $brand;
+            color: $brand;
+            box-shadow: 0 0 10px rgba($brand, 0.2);
+        }
+    }
+
+    .step-arrow-line {
+        flex: 1;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.06);
+        margin: 0 6px;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 4px;
+            height: 4px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%) rotate(45deg);
+        }
+    }
+}
+
+@keyframes border-sparkle {
+    0% { border-color: rgba($brand-accent, 0.2); box-shadow: none; }
+    100% { border-color: rgba($brand-secondary, 0.5); box-shadow: 0 0 10px rgba($brand-secondary, 0.1); }
 }
 
 
 // ═══════════════════════════════════════════════════════════════════
-// EXPERIENCE SECTION
+// EXPERIENCE (SPLIT ALTERNATING TIMELINE)
 // ═══════════════════════════════════════════════════════════════════
 .experience-section {
-    padding: 120px 0;
-    background: $surface-950;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 100px 0;
+    background: #040813;
     position: relative;
 }
 
 .exp-timeline {
     position: relative;
-    padding: 0 24px;
-    padding-left: 60px;
-}
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 0;
 
-.timeline-line {
-    position: absolute;
-    left: 36px;
-    top: 0;
-    width: 2px;
-    height: 0;
-    background: linear-gradient(to bottom, $brand, rgba($brand-secondary, 0.3), transparent);
+    .timeline-line {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: linear-gradient(to bottom, rgba($brand-secondary, 0.05), $brand, $brand-accent, rgba($brand-accent, 0.05));
+        transform: translateX(-50%);
+
+        @media (max-width: 768px) {
+            left: 30px;
+        }
+    }
 }
 
 .exp-card {
     position: relative;
+    width: 100%;
     margin-bottom: 60px;
-    opacity: 0;
+    display: flex;
 
-    &:last-child {
-        margin-bottom: 0;
+    &:last-child { margin-bottom: 0; }
+
+    // Alternate Alignments
+    &.timeline-left {
+        justify-content: flex-start;
+        .exp-card-inner {
+            margin-right: auto;
+            text-align: right;
+            
+            .exp-highlight {
+                justify-content: flex-end;
+            }
+        }
+        
+        .exp-dot {
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    &.timeline-right {
+        justify-content: flex-end;
+        .exp-card-inner {
+            margin-left: auto;
+            text-align: left;
+        }
+        .exp-dot {
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    @media (max-width: 768px) {
+        &.timeline-left, &.timeline-right {
+            justify-content: flex-start;
+            padding-left: 60px;
+
+            .exp-card-inner {
+                margin: 0;
+                width: 100%;
+                text-align: left;
+
+                .exp-highlight {
+                    justify-content: flex-start;
+                }
+            }
+
+            .exp-dot {
+                left: 30px;
+            }
+        }
     }
 }
 
+// Experience Card Content Box
 .exp-card-inner {
+    width: 44%;
     position: relative;
-    padding: 32px 40px;
-    background: rgba($surface-800, 0.3);
-    border: 1px solid rgba(white, 0.04);
-    border-radius: 20px;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    cursor: default;
-
-    &:hover {
-        background: rgba($surface-800, 0.6);
-        border-color: rgba($brand, 0.15);
-        transform: translateX(8px);
-
-        .exp-dot-ring {
-            transform: scale(1.5);
-            border-color: $brand;
-        }
-
-        .exp-dot-core {
-            background: $brand;
-            box-shadow: 0 0 20px rgba($brand, 0.5);
-        }
-    }
-}
-
-.exp-dot {
-    position: absolute;
-    left: -44px;
-    top: 36px;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.exp-dot-ring {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border: 2px solid rgba(white, 0.1);
-    transition: all 0.4s ease;
-}
-
-.exp-dot-core {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(white, 0.3);
-    transition: all 0.4s ease;
-}
-
-.exp-meta {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-}
-
-.exp-date {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: $brand;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    padding: 4px 12px;
-    border: 1px solid rgba($brand, 0.2);
-    border-radius: 999px;
-    background: rgba($brand, 0.05);
-}
-
-.exp-type {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: rgba(white, 0.3);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-}
-
-.exp-company {
-    font-size: 28px;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 4px;
-    letter-spacing: -0.02em;
-}
-
-.exp-role {
-    font-size: 14px;
-    color: rgba(white, 0.4);
-    font-weight: 500;
-    margin-bottom: 16px;
-}
-
-.exp-description {
-    font-size: 15px;
-    color: rgba(white, 0.45);
-    line-height: 1.7;
-    max-width: 700px;
-}
-
-.exp-highlights {
-    margin-top: 16px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px 24px;
-}
-
-.exp-highlight {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 13px;
-    color: rgba(white, 0.4);
-    line-height: 1.5;
-
-    .exp-arrow {
-        color: $brand;
-        flex-shrink: 0;
-        margin-top: 2px;
-    }
-}
-
-
-// ═══════════════════════════════════════════════════════════════════
-// PROJECTS SECTION
-// ═══════════════════════════════════════════════════════════════════
-.projects-section {
-    padding: 120px 24px;
-    background: $surface-900;
-    border-top: 1px solid rgba(white, 0.03);
-}
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 32px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.project-card {
-    perspective: 1200px;
-    opacity: 0;
-}
-
-.project-card-inner {
-    position: relative;
-    padding: 48px;
-    background: rgba($surface-800, 0.4);
-    border: 1px solid rgba(white, 0.05);
-    border-radius: 28px;
+    background: rgba($surface-900, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 28px;
+    backdrop-filter: blur(10px);
     overflow: hidden;
-    transition: border-color 0.4s ease, box-shadow 0.4s ease;
-    will-change: transform;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+
+    .card-grid-texture {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        background-size: 12px 12px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+    }
 
     &:hover {
         border-color: rgba($brand, 0.2);
+        transform: translateY(-4px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+
+        .card-grid-texture {
+            opacity: 0.15;
+        }
     }
 }
 
-.project-glow {
+// Middle timeline dots
+.exp-dot {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    background: radial-gradient(ellipse at top left, rgba($brand, 0.05) 0%, transparent 60%);
-    pointer-events: none;
-    transition: opacity 0.4s;
-}
+    top: 30px;
+    width: 20px;
+    height: 20px;
+    z-index: 10;
 
-.project-badge {
-    display: inline-block;
-    padding: 4px 14px;
-    background: rgba($brand, 0.1);
-    border: 1px solid rgba($brand, 0.2);
-    border-radius: 999px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.2em;
-    color: $brand;
-    margin-bottom: 20px;
-}
+    .exp-dot-ring {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: rgba($brand, 0.1);
+        border: 1.5px solid rgba($brand, 0.5);
+        animation: pulse-ring 2.5s infinite;
+    }
 
-.project-header {
-    margin-bottom: 16px;
-}
-
-.project-name {
-    font-size: 32px;
-    font-weight: 800;
-    color: white;
-    letter-spacing: -0.02em;
-    margin-bottom: 4px;
-}
-
-.project-type {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: rgba(white, 0.35);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-
-.project-desc {
-    font-size: 15px;
-    color: rgba(white, 0.45);
-    line-height: 1.7;
-    max-width: 600px;
-    margin-bottom: 24px;
-}
-
-.project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 16px;
-}
-
-.project-tag {
-    padding: 6px 16px;
-    background: rgba(white, 0.04);
-    border: 1px solid rgba(white, 0.06);
-    border-radius: 999px;
-    font-size: 12px;
-    font-family: 'JetBrains Mono', monospace;
-    color: rgba(white, 0.5);
-    transition: all 0.3s;
-
-    &:hover {
-        color: $brand;
-        border-color: rgba($brand, 0.3);
+    .exp-dot-core {
+        position: absolute;
+        inset: 6px;
+        border-radius: 50%;
+        background: $brand;
     }
 }
 
-.project-meta-row {
-    display: flex;
-    gap: 16px;
-}
+.exp-content {
+    position: relative;
+    z-index: 2;
 
-.project-hash {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: rgba(white, 0.2);
-    text-transform: uppercase;
-}
+    .exp-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 12px;
+        align-items: center;
+        justify-content: inherit;
 
-.project-featured .project-card-inner {
-    padding: 64px;
-}
+        .exp-date {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            color: $brand-secondary;
+        }
 
-
-// ═══════════════════════════════════════════════════════════════════
-// RESPONSIVE
-// ═══════════════════════════════════════════════════════════════════
-@media (max-width: 1024px) {
-    .tech-dna-track {
-        grid-template-columns: repeat(2, 1fr);
+        .exp-type {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 1px 6px;
+            border-radius: 4px;
+            background: rgba(0,0,0,0.15);
+        }
     }
 
-    .stat-orbs {
-        display: none;
+    .exp-company {
+        font-family: 'Outfit', sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        color: white;
+        margin-bottom: 4px;
     }
 
-    .project-featured .project-card-inner {
-        padding: 40px;
-    }
-}
-
-@media (max-width: 768px) {
-    .tech-dna-track {
-        grid-template-columns: 1fr;
-        gap: 16px;
+    .exp-role {
+        font-size: 13px;
+        font-weight: 600;
+        color: rgba(255,255,255,0.6);
+        margin-bottom: 14px;
     }
 
-    .headline-line {
-        font-size: clamp(36px, 12vw, 80px);
+    .exp-description {
+        font-size: 13.5px;
+        line-height: 1.6;
+        color: rgba(255,255,255,0.5);
+        margin-bottom: 16px;
     }
 
     .exp-highlights {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .exp-highlight {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 12.5px;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.45);
+
+            .exp-arrow {
+                color: $brand;
+                font-weight: bold;
+                flex-shrink: 0;
+            }
+        }
+    }
+}
+
+
+// ═══════════════════════════════════════════════════════════════════
+// PROJECTS (IMMERSIVE INTERACTIVE MOCKUPS)
+// ═══════════════════════════════════════════════════════════════════
+.projects-section {
+    padding: 100px 0;
+    background: linear-gradient(to bottom, #040813, $surface-950);
+}
+
+.projects-grid-innovative {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+
+    @media (min-width: 992px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+// Featured Project Mockup Container (Spans full width)
+.featured-project-mockup {
+    @media (min-width: 992px) {
+        grid-column: span 2;
     }
 
-    .exp-timeline {
-        padding-left: 40px;
+    position: relative;
+    border-radius: 24px;
+    background: rgba($surface-900, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(15px);
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s;
+
+    .featured-project-inner {
+        padding: 40px;
     }
 
-    .exp-dot {
-        left: -30px;
+    .proj-badge {
+        display: inline-block;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 10px;
+        color: $brand-secondary;
+        border: 1px solid rgba($brand-secondary, 0.3);
+        padding: 2px 10px;
+        border-radius: 99px;
+        background: rgba($brand-secondary, 0.04);
+        margin-bottom: 16px;
     }
 
-    .timeline-line {
-        left: 16px;
+    .proj-name {
+        font-family: 'Outfit', sans-serif;
+        font-size: 28px;
+        font-weight: 800;
+        color: white;
+        margin-bottom: 4px;
     }
 
-    .project-card-inner {
-        padding: 28px;
+    .proj-type {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.4);
+        margin-bottom: 16px;
     }
 
-    .project-featured .project-card-inner {
-        padding: 28px;
+    .proj-desc {
+        font-size: 14.5px;
+        line-height: 1.7;
+        color: rgba(255,255,255,0.6);
+        max-width: 800px;
+        margin-bottom: 24px;
     }
 
-    .projects-grid {
-        gap: 20px;
+    .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 32px;
+
+        .project-tag {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
     }
 
-    .cta-magnetic {
-        padding: 14px 28px;
+    &:hover {
+        border-color: rgba($brand-secondary, 0.25);
+        box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    }
+}
+
+// macOS System Window Mockup
+.mockup-window {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+    overflow: hidden;
+    width: 100%;
+
+    .mockup-header {
+        display: flex;
+        align-items: center;
+        padding: 10px 16px;
+        background: rgba(255,255,255,0.02);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+        .window-buttons {
+            display: flex;
+            gap: 8px;
+
+            .win-btn {
+                width: 9px;
+                height: 9px;
+                border-radius: 50%;
+            }
+            .win-red { background: #ff5f56; }
+            .win-yellow { background: #ffbd2e; }
+            .win-green { background: #27c93f; }
+        }
+
+        .window-title {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.35);
+            margin: 0 auto;
+            transform: translateX(-20px);
+        }
     }
 
-    .section-header {
-        margin-bottom: 48px;
+    .mockup-body {
+        display: flex;
+        min-height: 250px;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
     }
+
+    .mockup-sidebar {
+        width: 140px;
+        background: rgba(255, 255, 255, 0.01);
+        border-right: 1px solid rgba(255, 255, 255, 0.04);
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        @media (max-width: 768px) {
+            width: 100%;
+            border-right: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            flex-direction: row;
+            overflow-x: auto;
+            padding: 10px 16px;
+        }
+
+        .sidebar-item {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: default;
+
+            &.active-item {
+                background: rgba($brand-secondary, 0.06);
+                border: 1px solid rgba($brand-secondary, 0.15);
+                color: $brand-secondary;
+            }
+        }
+    }
+
+    .mockup-main {
+        flex: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .mockup-stats-row {
+        display: flex;
+        gap: 16px;
+
+        .m-stat-box {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 8px;
+            padding: 10px 14px;
+
+            .m-stat-lbl {
+                font-family: 'Share Tech Mono', monospace;
+                font-size: 9px;
+                color: rgba(255, 255, 255, 0.35);
+                text-transform: uppercase;
+                margin-bottom: 4px;
+            }
+
+            .m-stat-val {
+                font-family: 'Outfit', sans-serif;
+                font-size: 16px;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .mockup-chart-container {
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+        padding: 12px;
+
+        .chart-header {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.35);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .wave-chart {
+            width: 100%;
+            height: 60px;
+            overflow: visible;
+        }
+    }
+
+    .mockup-logs-panel {
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        background: rgba(0,0,0,0.5);
+        border-radius: 8px;
+        overflow: hidden;
+
+        .logs-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.01);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 9px;
+            color: rgba(255,255,255,0.3);
+
+            .simulate-btn {
+                background: $brand-secondary;
+                color: black;
+                border: none;
+                font-family: 'Share Tech Mono', monospace;
+                font-size: 9px;
+                font-weight: bold;
+                padding: 3px 10px;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: transform 0.2s, background-color 0.2s;
+
+                &:hover {
+                    background: color-mix(in srgb, $brand-secondary, #ffffff 15%);
+                    transform: scale(1.02);
+                }
+
+                &:disabled {
+                    background: rgba(255,255,255,0.08);
+                    color: rgba(255,255,255,0.25);
+                    cursor: not-allowed;
+                }
+            }
+        }
+
+        .logs-terminal {
+            padding: 12px;
+            height: 90px;
+            overflow-y: auto;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.5;
+
+            .log-entry {
+                margin-bottom: 4px;
+                &:last-child { margin-bottom: 0; }
+
+                .log-indicator {
+                    color: $brand-secondary;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+// Sub Projects layout (grid below)
+.sub-project-card {
+    position: relative;
+    border-radius: 20px;
+    background: rgba($surface-900, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+
+    .sub-project-inner {
+        padding: 32px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .project-header {
+        margin-bottom: 12px;
+        
+        .proj-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2px;
+        }
+
+        .proj-type {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+        }
+    }
+
+    .proj-desc {
+        font-size: 13.5px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.55);
+        margin-bottom: 20px;
+    }
+
+    .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 24px;
+
+        .project-tag {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+    }
+
+    .mini-app-mockup {
+        margin-top: auto;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255,255,255,0.04);
+        border-radius: 10px;
+        padding: 16px;
+    }
+
+    &:hover {
+        border-color: rgba($brand, 0.2);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+}
+
+// V&S Geo Routing visual design
+.geo-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+
+    .geo-label {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.3);
+        text-transform: uppercase;
+    }
+
+    .geo-buttons {
+        display: flex;
+        gap: 6px;
+
+        .geo-btn {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.4);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 8.5px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            &.geo-active {
+                background: rgba($brand-secondary, 0.08);
+                border-color: $brand-secondary;
+                color: $brand-secondary;
+            }
+        }
+    }
+}
+
+.geo-routing-visual {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    margin-bottom: 10px;
+
+    .user-node, .server-node {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 10px;
+        padding: 4px 10px;
+        border-radius: 4px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .routing-wire {
+        flex: 1;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.05);
+        margin: 0 10px;
+        position: relative;
+
+        .pulse-packet {
+            position: absolute;
+            top: -2px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: $brand-secondary;
+            box-shadow: 0 0 8px $brand-secondary;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: left 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+            &.packet-left {
+                left: 10%;
+            }
+            &.packet-right {
+                left: 90%;
+            }
+        }
+    }
+}
+
+.geo-output {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+}
+
+// Payment Workflow pipeline visual design
+.pipeline-header {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.workflow-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+
+    .w-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        opacity: 0.3;
+        transition: opacity 0.3s, transform 0.3s;
+
+        .w-num {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 9px;
+        }
+
+        .w-lbl {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 8px;
+        }
+
+        &.step-done {
+            opacity: 0.6;
+            .w-num {
+                background: rgba($brand, 0.08);
+                border-color: rgba($brand, 0.4);
+                color: $brand;
+            }
+        }
+
+        &.step-current {
+            opacity: 1;
+            transform: scale(1.1);
+            .w-num {
+                background: rgba($brand-secondary, 0.15);
+                border-color: $brand-secondary;
+                color: $brand-secondary;
+                box-shadow: 0 0 10px rgba($brand-secondary, 0.3);
+            }
+            .w-lbl {
+                color: $brand-secondary;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.pipeline-security-log {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8.5px;
+    color: rgba(255,255,255,0.35);
+    background: rgba(0,0,0,0.2);
+    padding: 6px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+// Audio Waveform visual design
+.waveform-card-body {
+    .waveform-header {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 9px;
+        color: rgba(255,255,255,0.3);
+        text-transform: uppercase;
+        margin-bottom: 12px;
+    }
+
+    .waveform-svg-container {
+        padding: 8px 0;
+        margin-bottom: 10px;
+    }
+
+    .audio-waveform {
+        width: 100%;
+        height: 30px;
+        overflow: visible;
+
+        .bar {
+            transform-origin: bottom;
+            animation: audio-bounce 1.5s ease-in-out infinite alternate;
+        }
+
+        .bar-1 { animation-delay: 0.1s; }
+        .bar-2 { animation-delay: 0.3s; }
+        .bar-3 { animation-delay: 0.5s; }
+        .bar-4 { animation-delay: 0.2s; }
+        .bar-5 { animation-delay: 0.4s; }
+        .bar-6 { animation-delay: 0.7s; }
+        .bar-7 { animation-delay: 0.15s; }
+        .bar-8 { animation-delay: 0.35s; }
+        .bar-9 { animation-delay: 0.6s; }
+        .bar-10 { animation-delay: 0.45s; }
+    }
+
+    .mapping-log {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 9px;
+        color: rgba($brand, 0.75);
+        text-align: center;
+    }
+}
+
+@keyframes audio-bounce {
+    0% { transform: scaleY(0.3); }
+    100% { transform: scaleY(1); }
 }
