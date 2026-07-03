@@ -320,6 +320,11 @@ $border-color: rgba(255, 255, 255, 0.05);
         font-size: 14px;
         line-height: 1.6;
         color: rgba(255, 255, 255, 0.85);
+        min-height: 112px;
+        
+        @media (min-width: 480px) {
+            min-height: 88px;
+        }
 
         .term-prompt {
             color: $brand-accent;
@@ -348,7 +353,8 @@ $border-color: rgba(255, 255, 255, 0.05);
 }
 
 @keyframes caret-blink {
-    to { visibility: hidden; }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 // CTA Buttons
@@ -893,12 +899,11 @@ $border-color: rgba(255, 255, 255, 0.05);
             .mock-slider-thumb {
                 position: absolute;
                 top: 50%;
-                left: 70%;
+                left: 50%;
                 width: 10px;
                 height: 10px;
                 border-radius: 50%;
                 background: $brand-secondary;
-                transform: translate(-50%, -50%);
                 box-shadow: 0 0 10px rgba($brand-secondary, 0.5);
                 animation: slider-slide 4s infinite ease-in-out;
             }
@@ -919,8 +924,8 @@ $border-color: rgba(255, 255, 255, 0.05);
 }
 
 @keyframes slider-slide {
-    0%, 100% { left: 20%; }
-    50% { left: 80%; }
+    0%, 100% { transform: translate3d(-30px, -50%, 0); }
+    50% { transform: translate3d(30px, -50%, 0); }
 }
 
 // 4. CI/CD Pipeline Visualizer
@@ -955,7 +960,17 @@ $border-color: rgba(255, 255, 255, 0.05);
             background: rgba($brand-accent, 0.04);
             border-color: rgba($brand-accent, 0.4);
             color: rgba(255,255,255,0.8);
-            animation: border-sparkle 3s infinite alternate;
+            
+            &::before {
+                content: '';
+                position: absolute;
+                inset: -1px;
+                border-radius: 50%;
+                border: 1px solid rgba($brand-secondary, 0.5);
+                box-shadow: 0 0 10px rgba($brand-secondary, 0.25);
+                pointer-events: none;
+                animation: border-sparkle-pulse 3s infinite alternate;
+            }
         }
 
         &.secure-step {
@@ -986,9 +1001,9 @@ $border-color: rgba(255, 255, 255, 0.05);
     }
 }
 
-@keyframes border-sparkle {
-    0% { border-color: rgba($brand-accent, 0.2); box-shadow: none; }
-    100% { border-color: rgba($brand-secondary, 0.5); box-shadow: 0 0 10px rgba($brand-secondary, 0.1); }
+@keyframes border-sparkle-pulse {
+    0% { opacity: 0.3; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.05); }
 }
 
 
@@ -1163,11 +1178,11 @@ $border-color: rgba(255, 255, 255, 0.05);
             font-size: 9px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: rgba(255,255,255,0.4);
-            border: 1px solid rgba(255,255,255,0.06);
+            color: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 1px 6px;
             border-radius: 4px;
-            background: rgba(0,0,0,0.15);
+            background: rgba(0, 0, 0, 0.25);
         }
     }
 
@@ -1182,14 +1197,14 @@ $border-color: rgba(255, 255, 255, 0.05);
     .exp-role {
         font-size: 13px;
         font-weight: 600;
-        color: rgba(255,255,255,0.6);
+        color: rgba(255, 255, 255, 0.75);
         margin-bottom: 14px;
     }
 
     .exp-description {
         font-size: 13.5px;
         line-height: 1.6;
-        color: rgba(255,255,255,0.5);
+        color: rgba(255, 255, 255, 0.75);
         margin-bottom: 16px;
     }
 
@@ -1204,7 +1219,7 @@ $border-color: rgba(255, 255, 255, 0.05);
             gap: 8px;
             font-size: 12.5px;
             line-height: 1.5;
-            color: rgba(255, 255, 255, 0.45);
+            color: rgba(255, 255, 255, 0.7);
 
             .exp-arrow {
                 color: $brand;

@@ -13,12 +13,12 @@
             <button (click)="downloadResume()" class="btn-secondary">Get My Resume (PDF)</button>
         </div>
         <div class="mt-20 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="text-gray-600 font-mono text-xs uppercase tracking-widest">
+            <p class="text-gray-400 font-mono text-xs uppercase tracking-widest">
                 © 2026 Kaushal Shah · Senior Software Developer
             </p>
-            <div class="flex gap-8 text-xs font-mono text-gray-600 uppercase tracking-widest">
-                <a (click)="openLinkedIn()" class="hover:text-brand-primary cursor-pointer transition-colors">LinkedIn</a>
-                <a (click)="openEmail()" class="hover:text-brand-primary cursor-pointer transition-colors">Email</a>
+            <div class="flex gap-8 text-xs font-mono text-gray-400 uppercase tracking-widest">
+                <a href="https://linkedin.com/in/mrkaushalshah" target="_blank" (click)="trackClick('LinkedIn Link')" class="hover:text-brand-primary cursor-pointer transition-colors">LinkedIn</a>
+                <a href="mailto:kaushal@mrkaushalshah.com" (click)="trackClick('Email Link')" class="hover:text-brand-primary cursor-pointer transition-colors">Email</a>
             </div>
         </div>
     </div>
