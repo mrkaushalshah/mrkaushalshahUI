@@ -100,15 +100,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   experiences = [
     {
       company: 'Sparqal Systems',
-      role: 'Founder & Full-Stack Developer · Agentic AI & SaaS',
+      role: 'Senior Software Engineer · Agentic AI & SaaS',
       date: 'Dec 2025 — Present',
-      type: 'Founder',
-      description: 'Founded a tech agency specialized in enterprise-grade SaaS and Agentic AI automation. Architected Sparqal Orbit, a multi-tenant platform for Instagram automation and AI content scheduling.',
+      type: 'Senior',
+      description: 'Lead the end-to-end engineering of full-stack applications and enterprise-grade AI automation systems, accelerating delivery velocity by 25% through optimized dev workflows. Architected Sparqal Orbit, a multi-tenant platform for Instagram automation and AI content scheduling.',
       highlights: [
         'VPC-isolated multi-tenant architectures (AWS/DigitalOcean)',
-        'Built InnerDesk CRM (React/Node.js) & Real Estate systems',
-        'Multi-agent systems for autonomous AI workflows',
-        'Global delivery for LegalTech, FinTech, and E-commerce'
+        'Multi-agent LLM workflows reducing content generation time by 60%',
+        'V&S Apparel (geo-routed e-commerce) & GreenStream Accounts portal',
+        'Maintained 99.9% uptime SLA across global client production deployments'
       ]
     },
     {
@@ -117,7 +117,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       date: 'Aug 2025 — Dec 2025',
       type: 'Senior',
       description: 'Led the large-scale restructuring of a legacy banking platform for JJIT Fintech. Redesigned core modules for improved horizontal scalability and strict financial compliance.',
-      highlights: []
+      highlights: [
+        'Technical lead for restructuring legacy banking platform for JJIT Fintech',
+        'Redesigned 12 core modules to ensure high-throughput transaction processing',
+        'Optimized complex database queries & indexing to reduce API latency',
+        'Collaborated with compliance officers to align systems with banking regulations'
+      ]
     },
     {
       company: 'Xperate Systems',
@@ -126,10 +131,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       type: 'Senior',
       description: 'Delivered 8+ production-ready solutions for global law firms. Facilitated the transition from VB.NET to .NET 9 for high-scale customer portals.',
       highlights: [
-        '5-stage Payment Approval system with Windows Auth',
-        'Speech Processing middleware (SpeechLive/Actionstep)',
-        'Internal Revenue Forecasting & Automated Billing systems',
-        'RPA automation for mass account requests'
+        'Delivered 8+ enterprise LegalTech applications serving national law networks',
+        'Migrated legacy VB.NET Customer Portal to .NET 9/C# (20+ REST APIs)',
+        'Architected 5-stage Payment Approval system featuring Windows Auth',
+        'Built speech-processing middleware integrating Philips SpeechLive with Actionstep'
       ]
     },
     {
@@ -138,7 +143,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       date: 'Oct 2021 — Dec 2022',
       type: 'Developer',
       description: 'Engineered frontend architectures for HRMS, Finance, and Logistics sectors. Modernized legacy AngularJS platforms to Vue.js for top-tier financial clients. Implemented Cypress E2E suites for mission-critical stability.',
-      highlights: []
+      highlights: [
+        'Developed responsive user interfaces in Angular and Vue.js for 5 production systems',
+        'Migrated AngularJS to Vue.js for Pagatodo (FinTech), boosting page speeds by 45%',
+        'Introduced Cypress E2E pipelines, achieving 85% coverage and reducing bugs by 60%',
+        'Designed Figma wireframes and built 15+ core views for ART HRMS'
+      ]
     }
   ];
 
