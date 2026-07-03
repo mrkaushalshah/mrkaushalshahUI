@@ -1,0 +1,39 @@
+# Kaushal Shah - Senior Software Developer & Architect
+
+Kaushal Shah is a Senior Software Developer & Full-Stack Architect based in Pune, India, with over 4.5 years of professional experience building high-throughput backend APIs, multi-tenant SaaS platforms, and modern web applications.
+
+## Technical Expertise
+
+- **Backend & APIs**: .NET 9, ASP.NET Core, Node.js, Express, REST APIs, Entity Framework Core, Repository Patterns, Dependency Injection
+- **Frontend**: Angular 19/19 (TypeScript), React, Vue.js, TailwindCSS, SCSS, Responsive UI/UX Design, State Management (RxJS)
+- **Databases**: SQL Server, MongoDB, PostgreSQL
+- **Cloud & DevOps**: AWS (VPC, VPS hosting, EC2), Cloudflare (Caching, Browser Insights, Security), CI/CD Pipelines, Docker
+- **Advanced Workflows**: Agentic AI, LLM Integration, Secure Voting Protocols, Multi-tenant SaaS Architectures
+
+## Key Projects
+
+### 1. Sparqal Orbit
+A multi-tenant marketing automation SaaS platform designed for Instagram DM response workflows, multi-agent AI copy drafting, and automated content scheduling.
+- **Tech Stack**: Angular 19, Node.js, OpenAI API, AWS VPC, MongoDB.
+
+### 2. V&S Apparel
+An enterprise ERP and inventory management platform for apparel manufacturers with automated invoicing, order tracking, and production pipeline management.
+- **Tech Stack**: .NET 9, Angular 19, SQL Server, Entity Framework.
+
+### 3. Payment Approval System
+A secure, multi-level payment authorization portal with role-based access control, cryptographic verification, and audit logs.
+- **Tech Stack**: .NET Core, SQL Server, REST API.
+
+### 4. Speech Middleware
+An integration engine translating voice commands and speech patterns into backend actions, utilizing WebSocket communication and cloud voice APIs.
+- **Tech Stack**: Node.js, WebSockets, REST APIs.
+
+### 5. Secure Voting System (Case Study)
+A tamper-proof voting system hosting concurrent mock elections with absolute vote verification, zero downtime, and complete cryptographic security.
+- **Tech Stack**: Angular, Node.js, AWS VPS.
+
+## Links & Profiles
+
+- **Website**: [mrkaushalshah.com](https://mrkaushalshah.com)
+- **LinkedIn**: [linkedin.com/in/mrkaushalshah](https://www.linkedin.com/in/mrkaushalshah/)
+- **GitHub**: [github.com/mrkaushalshah](https://github.com/mrkaushalshah)

@@ -31,7 +31,8 @@
               "src/assets",
               "src/sitemap.xml",
               "src/manifest.webmanifest",
-              "src/robots.txt"
+              "src/robots.txt",
+              "src/llms.txt"
             ],
             "styles": [
               "src/styles.scss"

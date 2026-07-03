@@ -189,8 +189,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.seo.updateSeoData({
-      title: 'Senior Software Developer | Kaushal Shah | Pune',
-      description: 'Senior Software Developer & Full-Stack Engineer based in Pune with 4.5+ years of experience in FinTech, LegalTech, and SaaS. Expert in .NET 9, Angular 19, and Agentic AI.',
+      title: 'Senior Software Developer | Kaushal Shah | Pune, India',
+      description: 'Senior Software Developer in Pune with 4.5+ years of experience in FinTech, SaaS, and AI. Specialist in .NET 9, Angular 19, and scalable system architectures.',
       keywords: 'Senior Software Developer Pune, Senior Software Engineer Pune, Full Stack Developer Pune, Angular Expert Pune, .NET 9 Developer, Agentic AI Engineer, Kaushal Shah Portfolio, Software Architect Pune, Pune Tech Lead',
       url: 'https://mrkaushalshah.com',
       image: 'https://mrkaushalshah.com/assets/dp.png'
